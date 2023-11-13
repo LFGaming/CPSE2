@@ -446,3 +446,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+01-02-static-ball/_cpp_flags
+01-02-static-ball/_linker_flags
+01-02-static-ball/_linker_libs
+01-03-movable-ball/_cpp_flags
+01-03-movable-ball/_linker_flags
+01-03-movable-ball/_linker_libs
