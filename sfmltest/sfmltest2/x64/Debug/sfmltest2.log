@@ -1,0 +1,2 @@
+﻿main.obj : error LNK2001: unresolved external symbol "public: static class sf::RenderStates const sf::RenderStates::Default" (?Default@RenderStates@sf@@2V12@B)
+C:\Users\micro\Dropbox\Luke\School\CPSE2\sfmltest\x64\Debug\sfmltest2.exe : fatal error LNK1120: 1 unresolved externals
