@@ -45,7 +45,7 @@ public:
 int main( int argc, char *argv[] ){
 	std::cout << "Starting application 01-05 array of actions\n";
 
-	sf::RenderWindow window{ sf::VideoMode{ 640, 480 }, "SFML window" };
+	sf::RenderWindow window{ sf::VideoMode{ 640, 480 }, "SFML window", sf::Style::Close | sf::Style::Titlebar};
 	ball my_ball{ sf::Vector2f{ 320.0, 240.0 } };
 
 	action actions[] = {
