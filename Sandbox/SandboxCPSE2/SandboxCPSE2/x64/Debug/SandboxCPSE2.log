@@ -1,10 +1,2 @@
 ﻿  ball.cpp
-C:\Users\micro\Dropbox\Luke\School\CPSE2\opdracht-1\ball.cpp(7,12): error C2511: 'void ball::handle_collision(block &,wall &)': overloaded member function not found in 'ball'
-C:\Users\micro\Dropbox\Luke\School\CPSE2\opdracht-1\ball.hpp(9,7): message : see declaration of 'ball'
-C:\Users\micro\Dropbox\Luke\School\CPSE2\opdracht-1\ball.cpp(8,9): error C2352: 'ball::collides_with': a call of a non-static member function requires an object
-C:\Users\micro\Dropbox\Luke\School\CPSE2\opdracht-1\ball.hpp(17,10): message : see declaration of 'ball::collides_with'
-C:\Users\micro\Dropbox\Luke\School\CPSE2\opdracht-1\ball.cpp(17,9): error C2352: 'ball::collides_with': a call of a non-static member function requires an object
-C:\Users\micro\Dropbox\Luke\School\CPSE2\opdracht-1\ball.hpp(26,10): message : see declaration of 'ball::collides_with'
-  main.cpp
-  Generating Code...
-C:\Users\micro\Dropbox\Luke\School\CPSE2\opdracht-1\main.cpp : fatal  error C1090: PDB API call failed, error code '3': C:\Users\micro\Dropbox\Luke\School\CPSE2\Sandbox\SandboxCPSE2\SandboxCPSE2\x64\Debug\vc143.pdb
+  SandboxCPSE2.vcxproj -> C:\Users\micro\Dropbox\Luke\School\CPSE2\Sandbox\SandboxCPSE2\x64\Debug\SandboxCPSE2.exe

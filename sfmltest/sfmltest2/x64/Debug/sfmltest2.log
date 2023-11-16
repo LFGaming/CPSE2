@@ -1,2 +1,6 @@
-﻿main.obj : error LNK2001: unresolved external symbol "public: static class sf::RenderStates const sf::RenderStates::Default" (?Default@RenderStates@sf@@2V12@B)
-C:\Users\micro\Dropbox\Luke\School\CPSE2\sfmltest\x64\Debug\sfmltest2.exe : fatal error LNK1120: 1 unresolved externals
+﻿  ball.cpp
+  block.cpp
+  main.cpp
+  wall.cpp
+  Generating Code...
+C:\Users\micro\Dropbox\Luke\School\CPSE2\opdracht-1\block.cpp : fatal  error C1090: PDB API call failed, error code '3': C:\Users\micro\Dropbox\Luke\School\CPSE2\sfmltest\sfmltest2\x64\Debug\vc143.pdb

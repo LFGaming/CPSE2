@@ -1,8 +1,15 @@
 #include <SFML/Graphics.hpp>
 #include "ball.hpp"
 
-ball::ball(sf::Vector2f position, sf::Vector2f velocity) 
-    : radius(30.0f), position(position), velocity(velocity) {}
+ball::ball(sf::Vector2f position, sf::Vector2f velocity) :
+    position(position),
+    velocity(velocity), // Move this line before 'circle2'
+    radius(30.0f),
+    circle2(radius)
+{
+    circle2.setRadius(radius);
+    circle2.setPosition(position);
+}
 
 void ball::handle_collision(block &block, wall &wall) {
     if (collides_with(wall)) {
@@ -30,14 +37,16 @@ void ball::handle_collision(block &block, wall &wall) {
     }
 }
 
-void ball::move() {
+void ball::move(sf::Vector2f delta){
     position += velocity;
 }
 
-void ball::draw( sf::RenderWindow & window ) const {
+void ball::draw( sf::RenderWindow & window ) {
     sf::CircleShape circle(radius); // Create a circle with radius
     circle.setPosition(position); // Set its position
     circle.setFillColor(sf::Color::Red); // Set its color
+    circle2.setPosition(position);
+    //std::cout << circle2.getPosition().x << std::endl;
     window.draw(circle); // Draw it on the window
 }
 
@@ -50,4 +59,16 @@ void ball::jump( sf::Vector2i target ){
         static_cast< float >( target.x ), 
         static_cast< float >( target.y )
     ));
+}
+
+void ball::hasOverlap(const std::vector<wall>& walls) { // Make this a member function
+    for (unsigned int i = 0; i < walls.size(); i++) {
+        if (circle2.getGlobalBounds().intersects(walls[i].rectangleshape.getGlobalBounds())) {
+            //std::cout << circle2.getPosition().x;
+            //std::cout << "frank";
+            //return true;
+            velocity.x *= -1;
+            velocity.y *= -1;
+        }
+    }
 }

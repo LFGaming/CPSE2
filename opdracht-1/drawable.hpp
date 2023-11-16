@@ -3,23 +3,10 @@
 #include <SFML/Graphics.hpp>
 
 class drawable {
-    protected:
-        sf::Vector2f position;
-        sf::Color color;
-        sf::Vector2f bounce;
-
-    public:
-        drawable(const sf::Vector2f& position, const sf::Color& color, sf::Vector2f bounce):
-            position{position},
-            color{color},
-            bounce{bounce}
-        {}
-
-        virtual void draw(sf::RenderWindow &window);
-        
-        virtual sf::Vector2f getBounce(sf::FloatRect &thing){
-            return bounce;
-        }
+public:
+    //drawable(){};
+    virtual void draw( sf::RenderWindow & window ) = 0;
+    virtual void move( sf::Vector2f delta = sf::Vector2f{0,0}) = 0;
 };
 
 #endif // OBJECT_HPP

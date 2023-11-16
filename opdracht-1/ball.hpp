@@ -5,14 +5,18 @@
 #include "block.hpp"
 #include "wall.hpp"
 #include <iostream>
+#include <vector>
+#include "drawable.hpp"
 
-class ball {
+class ball : public drawable {
 public:
     ball( sf::Vector2f position, sf::Vector2f velocity = sf::Vector2f(1.0, 1.0) );
-    void draw( sf::RenderWindow & window ) const;
-    void move();
+    void draw( sf::RenderWindow & window ) override;
+    void move(sf::Vector2f delta = sf::Vector2f{ 0,0 }) override;
     void jump( sf::Vector2f target );
     void jump( sf::Vector2i target );
+    void handle_collision(block &block, wall &wall);
+    void hasOverlap(const std::vector<wall>& walls); // Pass by const reference
 
     bool collides_with(const wall & other) const {
         // Check if the ball's position is within the boundaries of the wall
@@ -35,13 +39,16 @@ void bounce(const sf::Vector2f & normal) {
     float dotProduct = velocity.x * normal.x + velocity.y * normal.y;
     velocity = velocity - 2.0f * dotProduct * normal;
 }
-    void handle_collision();
+    // void handle_collision(block &block, wall &wall);
     // void bounce(const sf::Vector2f & normal);
+    
+    // void hasOverlap(std::vector<wall> walls);
 
 private:
-    float radius;
     sf::Vector2f position;
     sf::Vector2f velocity;
+    sf::CircleShape circle2; // Move this line before 'velocity'
+    float radius;
     float size;
 };
 

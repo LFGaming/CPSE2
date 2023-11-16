@@ -1,10 +1,11 @@
 #include <iostream>
 #include <functional>
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include "ball.hpp"
 #include "block.hpp"
 #include "wall.hpp"
-// #include "drawable.hpp"
+#include "drawable.hpp"
 
 class action {
 private:
@@ -60,6 +61,11 @@ int main( int argc, char *argv[] ){
 	wall left_wall{ sf::Vector2f{ 0.0, 0.0 }, sf::Vector2f{ 10.0, 480.0 }, sf::Color::Magenta };
 	wall right_wall{ sf::Vector2f{ 630.0, 0.0 }, sf::Vector2f{ 10.0, 480.0 }, sf::Color::Green };
 
+	std::vector<wall> walls;
+	walls.push_back(top_wall);
+	walls.push_back(bottom_wall);
+	walls.push_back(left_wall);
+	walls.push_back(right_wall);
 
 	action actions[] = {
 		action( sf::Keyboard::Left,  [&](){ my_block.move( sf::Vector2f( -1.0,  0.0 )); }),
@@ -77,25 +83,21 @@ while (window.isOpen()) {
     window.clear();
     my_ball.draw(window);
     my_block.draw(window);
+my_ball.hasOverlap(walls);
 
     // Collision detection and response
-    wall* walls[] = { &top_wall, &bottom_wall, &left_wall, &right_wall };
-    for(auto & wall : walls) {
-        if (my_ball.collides_with(*wall)) {
-            my_ball.handle_collision();
-        }
-    }
+// wall* walls[] = { &top_wall, &bottom_wall, &left_wall, &right_wall };
+// for(auto & wall : walls) {
+//     if (my_ball.collides_with(*wall)) {
+//         my_ball.handle_collision(my_block, *wall);
+//     }
+// }
 
-    if(my_ball.collides_with(my_block)) {
-        my_ball.bounce(my_block.get_normal());
-    }
-
-    my_ball.move();
-
-    top_wall.draw(window);
-    bottom_wall.draw(window);
-    left_wall.draw(window);
-    right_wall.draw(window);
+my_ball.move();
+top_wall.draw(window);
+bottom_wall.draw(window);
+left_wall.draw(window);
+right_wall.draw(window);
 
     window.display();
 

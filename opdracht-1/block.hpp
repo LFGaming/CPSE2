@@ -2,15 +2,16 @@
 #define _BLOCK_HPP
 
 #include <SFML/Graphics.hpp>
+#include "drawable.hpp"
 
-class block {
+class block : public drawable {
 public:
 
 	block( sf::Vector2f position, sf::Vector2f size, sf::Color colorRGB );
 
-	void draw( sf::RenderWindow & window ) const;
+	void draw( sf::RenderWindow & window ) override;
 
-	void move( sf::Vector2f delta );
+	void move( sf::Vector2f delta ) override;
 
 	void jump( sf::Vector2f target );
 	void jump( sf::Vector2i target );

@@ -7,7 +7,7 @@ block::block( sf::Vector2f position, sf::Vector2f size, sf::Color colorRGB ) :
     colorRGB{ colorRGB }
 {}
 
-void block::draw( sf::RenderWindow & window ) const {
+void block::draw( sf::RenderWindow & window ) {
     sf::RectangleShape rectangle(size); // Set size of rectangle
     rectangle.setPosition(position);
     rectangle.setFillColor(colorRGB);
