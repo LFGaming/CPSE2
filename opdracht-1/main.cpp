@@ -4,6 +4,7 @@
 #include "ball.hpp"
 #include "block.hpp"
 #include "wall.hpp"
+// #include "drawable.hpp"
 
 class action {
 private:
@@ -77,13 +78,19 @@ while (window.isOpen()) {
     my_ball.draw(window);
     my_block.draw(window);
 
-    my_ball.move();
+    // Collision detection and response
+    wall* walls[] = { &top_wall, &bottom_wall, &left_wall, &right_wall };
+    for(auto & wall : walls) {
+        if (my_ball.collides_with(*wall)) {
+            my_ball.handle_collision();
+        }
+    }
 
-    my_ball.bounce(my_block);
-    my_ball.bounce(top_wall);
-    my_ball.bounce(bottom_wall);
-    my_ball.bounce(left_wall);
-    my_ball.bounce(right_wall);
+    if(my_ball.collides_with(my_block)) {
+        my_ball.bounce(my_block.get_normal());
+    }
+
+    my_ball.move();
 
     top_wall.draw(window);
     bottom_wall.draw(window);

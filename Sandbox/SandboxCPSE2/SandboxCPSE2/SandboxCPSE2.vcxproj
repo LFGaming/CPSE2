@@ -18,6 +18,18 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\opdracht-1\ball.hpp" />
+    <ClInclude Include="..\..\..\opdracht-1\block.hpp" />
+    <ClInclude Include="..\..\..\opdracht-1\drawable.hpp" />
+    <ClInclude Include="..\..\..\opdracht-1\wall.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\opdracht-1\ball.cpp" />
+    <ClCompile Include="..\..\..\opdracht-1\block.cpp" />
+    <ClCompile Include="..\..\..\opdracht-1\main.cpp" />
+    <ClCompile Include="..\..\..\opdracht-1\wall.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -132,9 +144,6 @@
       <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="mainbackup.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
