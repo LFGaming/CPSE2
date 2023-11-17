@@ -50,10 +50,8 @@ int main( int argc, char *argv[] ){
 	std::cout << "Starting application opdracht 1\n";
 
     sf::RenderWindow window{ sf::VideoMode{ 640, 480 }, "SFML window", sf::Style::Close | sf::Style::Titlebar};
-    // ball my_ball{ sf::Vector2f{ 320.0, 240.0 } };
 	ball my_ball{ sf::Vector2f{ 320.0, 240.0 }, sf::Vector2f{ 1.0, 1.0 } }; // Add velocity parameter
     block my_block{ sf::Vector2f{ 100.0, 100.0 }, sf::Vector2f{ 50.0, 50.0 }, sf::Color::Yellow };
-    // wall my_wall{ sf::Vector2f{ 320.0, 240.0 }, sf::Vector2f{ 50.0, 50.0 } }; // Add size parameter
 
     // Create four walls
     wall top_wall{ sf::Vector2f{ 0.0, 0.0 }, sf::Vector2f{ 640.0, 10.0 }, sf::Color::Blue };
@@ -88,22 +86,10 @@ while (window.isOpen()) {
     window.clear();
     my_ball.draw(window);
     my_block.draw(window);
-// my_ball.hasOverlap(drawables);
-// my_ball.handle_collision(my_block);
-
-    // Collision detection and response
-// wall* walls[] = { &top_wall, &bottom_wall, &left_wall, &right_wall };
-// for(auto & wall : walls) {
-//     if (my_ball.collides_with(*wall)) {
-//         my_ball.handle_collision(my_block, *wall);5
-//     }
-// }
-
-// my_ball.move();
-top_wall.draw(window);
-bottom_wall.draw(window);
-left_wall.draw(window);
-right_wall.draw(window);
+	top_wall.draw(window);
+	bottom_wall.draw(window);
+	left_wall.draw(window);
+	right_wall.draw(window);
 
     window.display();
 
@@ -119,28 +105,3 @@ right_wall.draw(window);
 	std::cout << "Terminating application\n";
 	return 0;
 }
-
-/*
-    for(auto & action : actions) {
-        action();
-    }
-
-    window.clear();
-    my_ball.draw(window);
-    my_block.draw(window);
-
-    // Handle collisions with each wall individually
-    my_ball.handle_collision(my_block, top_wall);
-    my_ball.handle_collision(my_block, bottom_wall);
-    my_ball.handle_collision(my_block, left_wall);
-    my_ball.handle_collision(my_block, right_wall);
-
-    my_ball.move();
-
-    top_wall.draw(window);
-    bottom_wall.draw(window);
-    left_wall.draw(window);
-    right_wall.draw(window);
-
-    window.display();
-*/

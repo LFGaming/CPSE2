@@ -5,12 +5,10 @@ wall::wall( sf::Vector2f position, sf::Vector2f size, sf::Color colorRGB ) : // 
     position{ position },
     size{ size },
 	colorRGB{ colorRGB}
-    //rectangleshape(size)
 {
     rectangleshape = sf::RectangleShape(size);
     rectangleshape.setPosition(position);
     rectangleshape.setFillColor(sf::Color(colorRGB));
-    //rectangleshape.setPosition(position-size);
 }
 
 void wall::draw( sf::RenderWindow & window ) {

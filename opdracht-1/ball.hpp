@@ -41,10 +41,6 @@ void bounce(const sf::Vector2f & normal) {
     float dotProduct = velocity.x * normal.x + velocity.y * normal.y;
     velocity = velocity - 2.0f * dotProduct * normal;
 }
-    // void handle_collision(block &block, wall &wall);
-    // void bounce(const sf::Vector2f & normal);
-    
-    // void hasOverlap(std::vector<wall> walls);
 
 private:
     sf::Vector2f position;
