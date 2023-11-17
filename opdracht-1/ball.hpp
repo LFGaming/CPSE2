@@ -15,8 +15,10 @@ public:
     void move(sf::Vector2f delta = sf::Vector2f{ 0,0 }) override;
     void jump( sf::Vector2f target );
     void jump( sf::Vector2i target );
-    void handle_collision(block &block, wall &wall);
-    void hasOverlap(const std::vector<wall>& walls); // Pass by const reference
+    // void handle_collision(block &block, wall &wall);
+    void handle_collision(block &block);
+    void hasOverlap(const std::vector<drawable*>& drawables);
+    sf::FloatRect getGlobalBounds() const override;
 
     bool collides_with(const wall & other) const {
         // Check if the ball's position is within the boundaries of the wall
@@ -47,8 +49,8 @@ void bounce(const sf::Vector2f & normal) {
 private:
     sf::Vector2f position;
     sf::Vector2f velocity;
-    sf::CircleShape circle2; // Move this line before 'velocity'
     float radius;
+    sf::CircleShape circle2; // Moved this line after 'radius'
     float size;
 };
 

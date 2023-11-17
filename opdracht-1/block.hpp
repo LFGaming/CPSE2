@@ -15,6 +15,10 @@ public:
 
 	void jump( sf::Vector2f target );
 	void jump( sf::Vector2i target );
+	sf::RectangleShape rectangleshape;
+	sf::FloatRect getGlobalBounds() const override {
+    return rectangleshape.getGlobalBounds();
+}
 
 sf::Vector2f get_normal() const {
     // The normal of a block is a vector that points up (in 2D games, up is usually negative y)

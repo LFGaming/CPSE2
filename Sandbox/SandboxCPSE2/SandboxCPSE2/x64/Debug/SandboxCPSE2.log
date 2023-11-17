@@ -1,2 +1,6 @@
 ﻿  ball.cpp
-  SandboxCPSE2.vcxproj -> C:\Users\micro\Dropbox\Luke\School\CPSE2\Sandbox\SandboxCPSE2\x64\Debug\SandboxCPSE2.exe
+  block.cpp
+  main.cpp
+  wall.cpp
+  Generating Code...
+C:\Users\micro\Dropbox\Luke\School\CPSE2\opdracht-1\block.cpp : fatal  error C1090: PDB API call failed, error code '3': C:\Users\micro\Dropbox\Luke\School\CPSE2\Sandbox\SandboxCPSE2\SandboxCPSE2\x64\Debug\vc143.pdb

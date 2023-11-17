@@ -18,6 +18,9 @@ public:
         return sf::Vector2f(0, -1);
     }
     sf::RectangleShape rectangleshape;
+    sf::FloatRect getGlobalBounds() const override {
+    return rectangleshape.getGlobalBounds();
+}
 
 private:
     sf::Vector2f position;

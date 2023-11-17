@@ -7,6 +7,7 @@ public:
     //drawable(){};
     virtual void draw( sf::RenderWindow & window ) = 0;
     virtual void move( sf::Vector2f delta = sf::Vector2f{0,0}) = 0;
+    virtual sf::FloatRect getGlobalBounds() const = 0;
 };
 
 #endif // OBJECT_HPP
