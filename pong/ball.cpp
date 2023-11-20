@@ -82,11 +82,16 @@ void ball::hasOverlap(const std::vector<drawable*>& drawables) {
             sf::FloatRect lowersideblock = sf::FloatRect(boundingbox.left+5, boundingbox.top + boundingbox.height-5, boundingbox.width-10, 5);
 
             auto ballBounds = circle2.getGlobalBounds();
-            if(ballBounds.intersects(uppersideblock) || ballBounds.intersects(lowersideblock)){
-                velocity.y *= -10;
-            }
-            else if(ballBounds.intersects(leftsideblock) || ballBounds.intersects(rightsideblock)){
+            if(ballBounds.intersects(uppersideblock)){
+                velocity.y *= -1;
+            }else if(ballBounds.intersects(lowersideblock)){
+                velocity.y *= -1;
+            }else if(ballBounds.intersects(leftsideblock)){
                 velocity.x *= -1;
+                std::cout<<"Right hit\n";
+            }else if(ballBounds.intersects(rightsideblock)){
+                velocity.x *= -1;
+                std::cout<<"Left hit\n";
             }
         }
     }

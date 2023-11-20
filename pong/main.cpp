@@ -50,7 +50,7 @@ int main( int argc, char *argv[] ){
 	std::cout << "Starting application opdracht 1\n";
 
     sf::RenderWindow window{ sf::VideoMode{ 640, 480 }, "SFML window", sf::Style::Close | sf::Style::Titlebar};
-	ball my_ball{ sf::Vector2f{ 320.0, 240.0 }, sf::Vector2f{ 1.0, 1.0 } }; // Add velocity parameter
+	ball my_ball{ sf::Vector2f{ 320.0, 240.0 }, sf::Vector2f{ 5.0, 5.0 } }; // Add velocity parameter
     block Right_block{ sf::Vector2f{ 540, 220.0 }, sf::Vector2f{ 50.0, 50.0 }, sf::Color::Yellow };
     block Left_block{ sf::Vector2f{ 100, 220.0 }, sf::Vector2f{ 50.0, 50.0 }, sf::Color::Green };
 
