@@ -19,16 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\opdracht-1\ball.hpp" />
-    <ClInclude Include="..\..\..\opdracht-1\block.hpp" />
-    <ClInclude Include="..\..\..\opdracht-1\drawable.hpp" />
-    <ClInclude Include="..\..\..\opdracht-1\wall.hpp" />
+    <ClCompile Include="..\..\..\pong\ball.cpp" />
+    <ClCompile Include="..\..\..\pong\block.cpp" />
+    <ClCompile Include="..\..\..\pong\main.cpp" />
+    <ClCompile Include="..\..\..\pong\wall.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\opdracht-1\ball.cpp" />
-    <ClCompile Include="..\..\..\opdracht-1\block.cpp" />
-    <ClCompile Include="..\..\..\opdracht-1\main.cpp" />
-    <ClCompile Include="..\..\..\opdracht-1\wall.cpp" />
+    <ClInclude Include="..\..\..\pong\ball.hpp" />
+    <ClInclude Include="..\..\..\pong\block.hpp" />
+    <ClInclude Include="..\..\..\pong\drawable.hpp" />
+    <ClInclude Include="..\..\..\pong\wall.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
