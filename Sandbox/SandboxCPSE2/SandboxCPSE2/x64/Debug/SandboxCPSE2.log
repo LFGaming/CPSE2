@@ -1,3 +1,2 @@
 ﻿  ball.cpp
-C:\Users\micro\OneDrive\Documenten\GitHub\CPSE2\pong\ball.cpp(92,17): error C2065: 'text': undeclared identifier
-C:\Users\micro\OneDrive\Documenten\GitHub\CPSE2\pong\ball.cpp(96,17): error C2065: 'text': undeclared identifier
+  SandboxCPSE2.vcxproj -> C:\Users\micro\OneDrive\Documenten\GitHub\CPSE2\Sandbox\SandboxCPSE2\x64\Debug\SandboxCPSE2.exe

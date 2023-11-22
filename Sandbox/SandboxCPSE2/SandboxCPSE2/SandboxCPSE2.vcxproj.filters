@@ -15,30 +15,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\pong\ball.cpp">
+    <ClCompile Include="..\..\..\opdracht-1\ball.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\pong\block.cpp">
+    <ClCompile Include="..\..\..\opdracht-1\block.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\pong\main.cpp">
+    <ClCompile Include="..\..\..\opdracht-1\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\pong\wall.cpp">
+    <ClCompile Include="..\..\..\opdracht-1\wall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\pong\ball.hpp">
+    <ClInclude Include="..\..\..\opdracht-1\ball.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\pong\block.hpp">
+    <ClInclude Include="..\..\..\opdracht-1\block.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\pong\drawable.hpp">
+    <ClInclude Include="..\..\..\opdracht-1\wall.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\pong\wall.hpp">
+    <ClInclude Include="..\..\..\opdracht-1\drawable.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
