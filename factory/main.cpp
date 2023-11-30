@@ -16,6 +16,7 @@ struct Shape {
     float size; // Diameter for circles
     sf::Color color;
     std::string textureFile; // Filename of the texture for pictures
+    sf::Vector2f scale; // Scale factor for pictures
 };
 
 std::vector<Shape> readShapesFromFile(const std::string& filename) {
@@ -39,8 +40,8 @@ std::vector<Shape> readShapesFromFile(const std::string& filename) {
             } else if (shape.type == "rectangle" || shape.type == "line") {
                 iss >> shape.position.x >> shape.position.y >> shape.end.x >> shape.end.y >> r >> g >> b;
                 shape.color = sf::Color(r, g, b);
-            } else if (shape.type == "picture") {
-                iss >> shape.position.x >> shape.position.y >> shape.textureFile;
+            }if (shape.type == "picture") {
+                iss >> shape.position.x >> shape.position.y >> shape.textureFile >> shape.scale.x >> shape.scale.y;
             }
             shapes.push_back(shape);
         } else {
@@ -149,17 +150,22 @@ for (const auto& shape : shapes) {
             sf::Vertex(shape.end, shape.color)
         };
         window.draw(line, 2, sf::Lines);
-    } else if (shape.type == "picture") {
-        sf::Texture texture;
-        if (!texture.loadFromFile(shape.textureFile)) {
-            std::cerr << "Error loading texture: " << shape.textureFile << std::endl;
-            continue;
+        }else if (shape.type == "picture") {
+            sf::Texture texture;
+            if (!texture.loadFromFile(shape.textureFile)) {
+                std::cerr << "Error loading texture: " << shape.textureFile << std::endl;
+                continue;
+            }
+            sf::Sprite sprite(texture);
+            sprite.setPosition(shape.position);
+
+            // Calculate the scale factor based on the original size and the desired size
+            sf::Vector2u originalSize = texture.getSize();
+            sprite.setScale(shape.scale.x / originalSize.x, shape.scale.y / originalSize.y);
+
+            window.draw(sprite);
         }
-        sf::Sprite sprite(texture);
-        sprite.setPosition(shape.position);
-        window.draw(sprite);
     }
-}
 
     my_ball.draw(window);
     my_block.draw(window);
