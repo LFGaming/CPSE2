@@ -2,7 +2,6 @@
 #include <functional>
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include "drawable.hpp"
 #include <fstream>
 #include <sstream>
 
