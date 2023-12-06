@@ -5,6 +5,21 @@
 #include <string>
 #include <algorithm>
 
+// Function to print character frequencies sorted by amount
+void printCharFrequencyByAmount(const std::vector<int>& frequency) {
+    std::vector<std::pair<int, char>> freqChar;
+    for (int i = 0; i < 26; i++) {
+        freqChar.push_back({frequency[i], static_cast<char>('a' + i)});
+    }
+    std::sort(freqChar.begin(), freqChar.end(), std::greater<>());
+    std::cout << "Frequency of characters (sorted by amount):" << std::endl;
+    for (const auto& pair : freqChar) {
+        std::cout << pair.second << ": " << pair.first << std::endl;
+    }
+}
+
+
+
 int main() {
     // Open the file
     std::ifstream file("KingJamesBible.txt");
@@ -13,55 +28,43 @@ int main() {
         return 1;
     }
 
-    // Read the file character by character and count the number of lines
-    std::vector<char> characters;
-    char ch;
-    int numLines = 0;
-    while (file.get(ch)) {
-        characters.push_back(ch);
-        if (ch == '\n') {
-            numLines++;
-        }
+    // Read the file into a string
+    std::string text;
+    std::string line;
+    while (std::getline(file, line)) {
+        text += line + '\n';
     }
+    // Count the number of lines
+    int numLines = std::count(text.begin(), text.end(), '\n') + 1;
 
     // Print the total number of characters and lines
-    std::cout << "Total number of characters: " << characters.size() << std::endl;
-    std::cout << "Total number of lines: " << numLines + 1 << std::endl;
-
-    // Count the number of alphabets
-    int numAlphabets = 0;
-    for (char ch : characters) {
-        if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')) {
-            numAlphabets++;
-        }
-    }
-    std::cout << "Total number of alphabets: " << numAlphabets << std::endl;
+    std::cout << "Total number of characters: " << text.size() << std::endl;
+    std::cout << "Total number of lines: " << numLines << std::endl;
 
     // Convert all uppercase characters to lowercase
-    for (char &ch : characters) {
-        if (ch >= 'A' && ch <= 'Z') {
-            ch = ch - 'A' + 'a';
-        }
-    }
+    std::transform(text.begin(), text.end(), text.begin(), [](unsigned char c){ return std::tolower(c); });
 
     // Count the frequency of each character
-    std::map<char, int> frequency;
-    for (char ch : characters) {
+    std::vector<int> frequency(26, 0);
+    for (char ch : text) {
         if (ch >= 'a' && ch <= 'z') {
-            frequency[ch]++;
+            frequency[ch - 'a']++;
         }
     }
 
-    // Print the frequency of each character
+    // Print the frequency of each character sorted by character
     std::cout << "Frequency of characters (sorted by character):" << std::endl;
-    for (auto pair : frequency) {
-        std::cout << pair.first << ": " << pair.second << std::endl;
+    for (int i = 0; i < 26; i++) {
+        std::cout << static_cast<char>('a' + i) << ": " << frequency[i] << std::endl;
     }
+
+    // Print the frequency of each character sorted by amount
+    printCharFrequencyByAmount(frequency);
 
     // Count the frequency of each word
     std::map<std::string, int> wordFrequency;
     std::string word;
-    for (char ch : characters) {
+    for (char ch : text) {
         if (ch >= 'a' && ch <= 'z') {
             word += ch;
         } else if (!word.empty()) {
@@ -74,30 +77,15 @@ int main() {
     }
 
     // Sort the words by frequency and print the 10 most common words
-    // Print a message indicating the 10 most common words will be displayed
-    std::cout << "10 most common words:" << std::endl;
-
-    // Create a vector to hold pairs of word frequency and the word itself
+    std::cout<< "10 most common words:" << std::endl;
     std::vector<std::pair<int, std::string>> sortedWordFrequency;
-
-    // Iterate over each word in the wordFrequency map
     for (auto pair : wordFrequency) {
-        // For each word, create a pair with the frequency as the first element and the word as the second
-        // Add this pair to the sortedWordFrequency vector
         sortedWordFrequency.push_back({pair.second, pair.first});
     }
-
-    // Sort the sortedWordFrequency vector in descending order of frequency
-    // std::greater<>() is a comparison function that sorts in descending order
     std::sort(sortedWordFrequency.begin(), sortedWordFrequency.end(), std::greater<>());
-
-    // Print the 10 most common words and their frequencies
-    // Iterate over the first 10 elements of the sortedWordFrequency vector (or fewer if the vector has less than 10 elements)
     for (size_t i = 0; i < 10 && i < sortedWordFrequency.size(); i++) {
-        // For each element, print the word (the second element of the pair) and the frequency (the first element of the pair)
         std::cout << sortedWordFrequency[i].second << ": " << sortedWordFrequency[i].first << std::endl;
     }
 
-    // End of main function, return 0 to indicate successful execution
     return 0;
 }
