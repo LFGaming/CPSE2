@@ -1,22 +1,43 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
-#include "DrawableEntity.hpp"
+#include <SFML/Graphics.hpp>
 
-struct Shape : public DrawableEntity {
-    std::string type;
+class Shape {
+protected:
     sf::Vector2f position;
-    sf::Vector2f end; // Second point for lines and rectangles
-    sf::Color color;
-    std::string textureFile;
-    sf::Vector2f scale;
+public:
+    Shape(const sf::Vector2f& position)
+        : position(position){}
     bool isDragging = false;
-    sf::Vector2f size;
 
     // Implementing methods from the base class
-    void draw(sf::RenderWindow& window) const override;
-    void move(const sf::Vector2f& offset) override;
-    bool contains(const sf::Vector2f& point) const override;
+    virtual void draw(sf::RenderWindow& window) const;
+    virtual void move(const sf::Vector2f& offset);
+    virtual bool contains(const sf::Vector2f& point) const;
+    virtual std::string saveme();
+
+    std::string getColorString(const sf::Color& color) {
+        if (color == sf::Color::Red) {
+            return "red";
+        } else if (color == sf::Color::Green ) {
+            return "green";
+        } else if (color == sf::Color::Blue) {
+            return "blue";
+        } else if (color == sf::Color::Yellow ) {
+            return "yellow";
+        } else if (color == sf::Color::Magenta) {
+            return "magenta";
+        } else if (color == sf::Color::Cyan) {
+            return "cyan";
+        } else if (color == sf::Color::White) {
+            return "white";
+        } else if (color == sf::Color::Black) {
+            return "black";
+        } else {
+            return "white";
+        }
+    }
 };
 
 #endif // SHAPE_HPP

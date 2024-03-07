@@ -4,9 +4,10 @@
 #include <fstream>
 #include <sstream>
 #include "Shape.hpp"
+#include "factory.hpp"
 
-std::vector<Shape> readShapesFromFile(const std::string& filename) {
-    std::vector<Shape> shapes;
+std::vector<std::unique_ptr<Shape>> readShapesFromFile(const std::string& filename) {
+    std::vector<std::unique_ptr<Shape>> shapes;
     std::ifstream file(filename);
 
     if (!file) {
@@ -14,27 +15,28 @@ std::vector<Shape> readShapesFromFile(const std::string& filename) {
         return shapes;
     }
 
+    std::vector<std::string> invalidLines; // Keep track of invalid lines
     std::string line;
-    while (std::getline(file, line)) {
-        std::istringstream iss(line);
-        Shape shape;
-        int r, g, b;
-        if (iss >> shape.type >> shape.position.x >> shape.position.y) {
-            if (shape.type == "circle" || shape.type == "rectangle") {
-                iss >> shape.size.x >> shape.size.y >> r >> g >> b;
-                shape.color = sf::Color(r, g, b);
-            } else if (shape.type == "line") {
-                iss >> shape.end.x >> shape.end.y >> r >> g >> b;
-                shape.color = sf::Color(r, g, b);
-            } else if (shape.type == "picture") {
-                iss >> shape.textureFile >> shape.scale.x >> shape.scale.y;
-            }
-            shapes.push_back(shape);
-        } else {
-            std::cerr << "Error reading line: " << line << std::endl;
+    int lineCount = 0; // Track line number for error reporting
+    try{
+        while (std::getline(file, line)) {
+            lineCount++;
+            std::unique_ptr<Shape> shape;
+            Factory factory;
+            shape = factory.createShape(line);
+            shapes.push_back(std::move(shape));
         }
+
+        // Close the file
+        file.close();
     }
-    return shapes;
+    catch(std::exception & error){
+        std::cerr << error.what();
+        std::cerr << "Error reading line " << lineCount << " in file: " << filename << std::endl <<std::endl;
+        exit(1);
+    }
+        return shapes;
+    
 }
 
 int main(int argc, char* argv[]) {
@@ -42,83 +44,68 @@ int main(int argc, char* argv[]) {
 
     sf::RenderWindow window{ sf::VideoMode{ 640, 480 }, "SFML window", sf::Style::Close | sf::Style::Titlebar };
 
-    std::vector<Shape> shapes = readShapesFromFile("objects.txt");
+    std::vector<std::unique_ptr<Shape>> shapes = readShapesFromFile("objects.txt");
 
-bool isAnyObjectBeingDragged = false;
-Shape* pickedObject = nullptr;
+    bool isAnyObjectBeingDragged = false;
+    Shape* pickedObject = nullptr;
 
-sf::Vector2f oldMousePos;
+    sf::Vector2f oldMousePos;
 
-while (window.isOpen()) {
-    window.clear();
+    while (window.isOpen()) {
+        window.clear();
 
-    for (auto& shape : shapes) {
-        shape.draw(window);
-    }
-
-    // Check for picking only if no object is being dragged
-    if (!isAnyObjectBeingDragged) {
         for (auto& shape : shapes) {
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-                if (shape.contains(mousePos)) {
-                    shape.isDragging = true;
-                    isAnyObjectBeingDragged = true;
-                    pickedObject = &shape;
-                    oldMousePos = mousePos;  // Store the initial mouse position
+            shape->draw(window);
+        }
+
+        // Check for picking only if no object is being dragged
+        if (!isAnyObjectBeingDragged) {
+            for (auto& shape : shapes) {
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                    sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+                    if (shape->contains(mousePos)) {
+                        shape->isDragging = true;
+                        isAnyObjectBeingDragged = true;
+                        pickedObject = shape.get();
+                        oldMousePos = mousePos;  // Store the initial mouse position
+                    }
                 }
             }
         }
-    }
 
-    window.display();
+        window.display();
 
-    sf::sleep(sf::milliseconds(20));
+        sf::sleep(sf::milliseconds(20));
 
-    sf::Event event;
-    while (window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed) {
-            window.close();
-        } else if (event.type == sf::Event::MouseButtonReleased) {
-            if (event.mouseButton.button == sf::Mouse::Left && pickedObject != nullptr) {
-                pickedObject->isDragging = false;
-                isAnyObjectBeingDragged = false;
-                pickedObject = nullptr;
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            } else if (event.type == sf::Event::MouseButtonReleased) {
+                if (event.mouseButton.button == sf::Mouse::Left && pickedObject != nullptr) {
+                    pickedObject->isDragging = false;
+                    isAnyObjectBeingDragged = false;
+                    pickedObject = nullptr;
+                }
+            }
+        }
+
+        sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+        for (auto& shape : shapes) {
+            if (shape->isDragging) {
+                sf::Vector2f offset = mousePos - oldMousePos;
+                shape->move(offset);
+                oldMousePos = mousePos;  // Update the old mouse position
             }
         }
     }
 
-    sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-    for (auto& shape : shapes) {
-        if (shape.isDragging) {
-            sf::Vector2f offset = mousePos - oldMousePos;
-            shape.move(offset);
-
-            // Adjust the endpoints for lines
-            if (shape.type == "line") {
-                shape.end += offset;
-            }
-
-            oldMousePos = mousePos;  // Update the old mouse position
-        }
-    }
-}
-
-
+    // Write the updated shapes back to the file
+    std::string shapeSaveString;
     std::ofstream file("objects.txt");
     for (const auto& shape : shapes) {
-        if (shape.type == "circle" || shape.type == "rectangle") {
-            file << shape.type << " " << shape.position.x << " " << shape.position.y << " "
-                 << shape.size.x << " " << shape.size.y << " "
-                 << (int)shape.color.r << " " << (int)shape.color.g << " " << (int)shape.color.b << "\n";
-        } else if (shape.type == "line") {
-            file << shape.type << " " << shape.position.x << " " << shape.position.y << " "
-                 << shape.end.x << " " << shape.end.y << " "
-                 << (int)shape.color.r << " " << (int)shape.color.g << " " << (int)shape.color.b << "\n";
-        } else if (shape.type == "picture") {
-            file << shape.type << " " << shape.position.x << " " << shape.position.y << " "
-                 << shape.textureFile << " " << shape.scale.x << " " << shape.scale.y << "\n";
-        }
+        shapeSaveString = shape->saveme();
+        file << shapeSaveString << "\n";
     }
     file.close();
 

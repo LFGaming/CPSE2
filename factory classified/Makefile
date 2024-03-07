@@ -9,10 +9,10 @@
 #############################################################################
 
 # source files in this project (main.cpp is automatically assumed)
-SOURCES := Shape.cpp
+SOURCES := 
 
 # header files in this project
-HEADERS := DrawableEntity.hpp Shape.hpp
+HEADERS := Shape.hpp line.hpp factory.hpp circle.hpp rectangle.hpp line.hpp picture.hpp
 
 # other places to look for files for this project
 SEARCH  := 
