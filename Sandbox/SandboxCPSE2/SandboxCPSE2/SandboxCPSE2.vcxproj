@@ -19,16 +19,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\opdracht-1\ball.cpp" />
-    <ClCompile Include="..\..\..\opdracht-1\block.cpp" />
-    <ClCompile Include="..\..\..\opdracht-1\main.cpp" />
-    <ClCompile Include="..\..\..\opdracht-1\wall.cpp" />
+    <ClInclude Include="..\..\..\factory classified\drawable.hpp" />
+    <ClInclude Include="..\..\..\factory classified\DrawableEntity.hpp" />
+    <ClInclude Include="..\..\..\factory classified\Shape.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\opdracht-1\ball.hpp" />
-    <ClInclude Include="..\..\..\opdracht-1\block.hpp" />
-    <ClInclude Include="..\..\..\opdracht-1\drawable.hpp" />
-    <ClInclude Include="..\..\..\opdracht-1\wall.hpp" />
+    <ClCompile Include="..\..\..\factory classified\main oldish.cpp" />
+    <ClCompile Include="..\..\..\factory classified\main.cpp" />
+    <ClCompile Include="..\..\..\factory classified\Shape.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\factory classified\Makefile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\factory classified\my_picture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\factory classified\objects.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

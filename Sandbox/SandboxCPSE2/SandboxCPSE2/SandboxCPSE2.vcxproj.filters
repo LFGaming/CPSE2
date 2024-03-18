@@ -15,31 +15,40 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\opdracht-1\ball.cpp">
+    <ClInclude Include="..\..\..\factory classified\Shape.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\factory classified\drawable.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\factory classified\DrawableEntity.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\factory classified\main oldish.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\opdracht-1\block.cpp">
+    <ClCompile Include="..\..\..\factory classified\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\opdracht-1\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\opdracht-1\wall.cpp">
+    <ClCompile Include="..\..\..\factory classified\Shape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\opdracht-1\ball.hpp">
+    <None Include="..\..\..\factory classified\Makefile">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\opdracht-1\block.hpp">
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\factory classified\my_picture.png">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\opdracht-1\wall.hpp">
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\factory classified\objects.txt">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\opdracht-1\drawable.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
+    </Text>
   </ItemGroup>
 </Project>

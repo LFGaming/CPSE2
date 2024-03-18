@@ -49,15 +49,15 @@ int main() {
     // Count the frequency of each character
     std::vector<int> frequency(26, 0);
     for (char ch : text) {
-        if (ch >= 'a' && ch <= 'z') {
+        if (std::isalpha(ch)) {
             frequency[ch - 'a']++;
         }
     }
 
     // Print the frequency of each character sorted by character
     std::cout << "Frequency of characters (sorted by character):" << std::endl;
-    for (int i = 0; i < 26; i++) {
-        std::cout << static_cast<char>('a' + i) << ": " << frequency[i] << std::endl;
+    for (char c = 'a'; c <='z'; c++) {
+        std::cout << static_cast<char>('a' + c) << ": " << frequency[c] << std::endl;
     }
 
     // Print the frequency of each character sorted by amount
@@ -67,7 +67,7 @@ int main() {
     std::map<std::string, int> wordFrequency;
     std::string word;
     for (char ch : text) {
-        if (ch >= 'a' && ch <= 'z') {
+        if (std::isalpha(ch)) {
             word += ch;
         } else if (!word.empty()) {
             wordFrequency[word]++;
@@ -91,11 +91,18 @@ int main() {
 
     // Sort the vector in descending order
     // std::partial_sort is used to sort only the first 10 elements, which improves performance
-    std::partial_sort(sortedWordFrequency.begin(), sortedWordFrequency.begin() + 10, sortedWordFrequency.end(), std::greater<>());
+    // std::partial_sort(sortedWordFrequency.begin(), sortedWordFrequency.begin() + 10, sortedWordFrequency.end(), std::greater<>());
+    std::sort(sortedWordFrequency.begin(), sortedWordFrequency.end(), std::greater<>());
 
     // Print the 10 most common words
     // std::for_each is used to iterate over the first 10 elements of the vector
     std::for_each(sortedWordFrequency.begin(), sortedWordFrequency.begin() + 10,
+                [](const std::pair<int, std::string>& pair) {
+                    // Print the word and its frequency
+                    std::cout << pair.second << ": " << pair.first << std::endl;
+                });
+
+    std::for_each(sortedWordFrequency.end()- 11, sortedWordFrequency.end() -1,
                 [](const std::pair<int, std::string>& pair) {
                     // Print the word and its frequency
                     std::cout << pair.second << ": " << pair.first << std::endl;

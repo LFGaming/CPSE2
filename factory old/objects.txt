@@ -1,0 +1,4 @@
+picture 439 52 my_picture.png 100 100
+circle 515 343 100 255 255 100 100
+rectangle 48 156 300 300 0 255 0
+line 412 235 462 406 0 0 255

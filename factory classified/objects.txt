@@ -1,4 +1,4 @@
-picture 467 102 my_picture.png 100 100
-circle 515 343 100 yellow
-rectangle 31 160 356 234 red
+picture -94 -98 my_picture.png 100 100
+circle -20 -36 100 yellow
+rectangle -356 -208 356 234 red
 line 403 265 453 436 blue

@@ -1,5 +1,7 @@
 # Week 3 Factory
 ---
+CPSE2 Herkansing 10/03/2024 - Opdracht 3 - Luke Tenback
+Dit programma is een BMPTK programma, je runt het dus met `bmptk-make run`
 
 Om dit programma te gebruiken moet je in objects.txt het type object wat je op het scherm wilt zien, gevolgd door de positie hiervan.
 
@@ -15,3 +17,5 @@ circle 515 343 100 yellow
 rectangle 31 160 356 234 red
 line 403 265 453 436 blue
 ```
+
+Zodra het programma runt kun je met de muis objecten vastpakken en verplatens, vervolgens weer loslaten door de muisknop los te laten.
