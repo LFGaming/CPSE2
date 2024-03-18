@@ -6,11 +6,12 @@
 
 class Rectangle : public Shape {
 protected:
+    sf::Vector2f pos2;
     sf::Vector2f size;
     sf::Color color;
 public:
-    Rectangle(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Color& color)
-        : Shape(position), size(size), color(color) {}
+    Rectangle(const sf::Vector2f& position, const sf::Vector2f& pos2, const sf::Color& color)
+        : Shape(position), pos2(pos2), color(color) {size = pos2 - position;}
 
     void draw(sf::RenderWindow& window) const override {
         sf::RectangleShape rectangle(size);
@@ -29,7 +30,7 @@ public:
     }
 
     std::string saveme()  override{
-        std::string s = "rectangle " + std::to_string(static_cast<int>(position.x)) + " " + std::to_string(static_cast<int>(position.y)) + " " + std::to_string(static_cast<int>(size.x)) + " " + std::to_string(static_cast<int>(size.y))  + " " + getColorString(color);
+        std::string s = "rectangle " + std::to_string(static_cast<int>(position.x)) + " " + std::to_string(static_cast<int>(position.y)) + " " + std::to_string(static_cast<int>(pos2.x)) + " " + std::to_string(static_cast<int>(pos2.y))  + " " + getColorString(color);
         return s;
     }
 };

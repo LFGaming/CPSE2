@@ -6,15 +6,16 @@
 
 class Picture : public Shape {
 protected:
+    sf::Texture texture;
     std::string image;
     sf::Vector2f size;
 public:
     Picture(const sf::Vector2f& position, const std::string& image, const sf::Vector2f& size)
-        : Shape(position), image(image), size(size) {}
+        : Shape(position), image(image), size(size) {
+            texture.loadFromFile(image);
+        }
 
     void draw(sf::RenderWindow& window) const override {
-        sf::Texture texture;
-        texture.loadFromFile(image);
         sf::Sprite sprite(texture);
         sprite.setPosition(position);
         sf::Vector2u originalSize = texture.getSize();

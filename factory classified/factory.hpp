@@ -1,6 +1,7 @@
 #ifndef FACTORY_HPP
 #define FACTORY_HPP
 
+#include "exception.hpp"
 #include "Shape.hpp"
 #include "Circle.hpp"
 #include "Rectangle.hpp"
@@ -30,7 +31,7 @@ public:
         } else if (color == "white"){
             return sf::Color::White;
         }else {
-            throw std::runtime_error("\nUnknown color \n");
+            throw unknown_color(color);
         }
     }
 
@@ -48,19 +49,19 @@ public:
         std::istringstream iss(line);
 
         iss >> type >> position.x >> position.y;
-        if (!position.x || !position.y)
+        if ((!position.x && position.x != 0) || (!position.y && position.y != 0))
         {
-            throw std::runtime_error("\nInvalid position \n");
+            throw invalid_position(type);
         }
         if(!iss){
-            throw std::runtime_error("\nInvalid file \n");
+            throw end_of_file();
         }
 
         if (type == "circle") {
             iss >> size >> colorString;
             if (!size)
             {
-                throw std::runtime_error("\nInvalid size \n");
+                throw invalid_size(type);
             }
             color = getColor(colorString);
             return std::make_unique<Circle>(position, size, color);
@@ -68,7 +69,7 @@ public:
             iss >> x >> y >> colorString;
             if (!x || !y)
             {
-                throw std::runtime_error("\nInvalid pos2 \n");
+                throw invalid_position(type);
             }
             position2 = sf::Vector2f(x, y);
             color = getColor(colorString);
@@ -77,7 +78,7 @@ public:
             iss >> x >> y >> colorString;
             if (!x || !y)
             {
-                throw std::runtime_error("\nInvalid end \n");
+                throw invalid_position(type);
             }
             position2 = sf::Vector2f(x, y);
             color = getColor(colorString);
@@ -86,12 +87,12 @@ public:
             iss >> image >> x >> y;
             if (!x || !y)
             {
-                throw std::runtime_error("\nInvalid scale \n");
+                throw invalid_scale(type);
             }
             position2 = sf::Vector2f(x, y);
             return std::make_unique<Picture>(position, image, position2);
         } else {
-            throw std::runtime_error("\nUnknown type \n");
+            throw unknown_shape(type);
         }
     }
 };
